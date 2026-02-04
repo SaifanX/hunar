@@ -1,12 +1,42 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PROJECTS } from '../constants';
 import { Link } from 'react-router-dom';
 import Counter from '../components/Counter';
 
+const TESTIMONIALS = [
+  {
+    quote: "The attention to structural detail was unlike anything we've seen. HUNAR didn't just design a home; they engineered a masterpiece that feels alive.",
+    author: "Rajiv Malhotra",
+    role: "CEO, TechStream",
+    location: "Bangalore"
+  },
+  {
+    quote: "Living in a space designed by HUNAR feels like living inside a piece of art. The lighting, the materials, the flow—absolute perfection.",
+    author: "Sarah Jenkins",
+    role: "Art Collector",
+    location: "London"
+  },
+  {
+    quote: "MBSYS engineering brought our ambitious vision to life where others said it was impossible. True partners in innovation and luxury.",
+    author: "Ahmad Al-Fayed",
+    role: "Real Estate Developer",
+    location: "Dubai"
+  }
+];
+
 const Home: React.FC = () => {
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveTestimonial((prev) => (prev + 1) % TESTIMONIALS.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
+    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
       {/* Hero Section */}
       <section className="relative w-full min-h-screen flex items-center justify-center px-6 lg:px-20 py-20 overflow-hidden bg-charcoal">
         <div className="absolute inset-0 opacity-20 pointer-events-none">
@@ -92,6 +122,53 @@ const Home: React.FC = () => {
             <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-primary">Global Standards</span>
             <Counter target={150} suffix="+" />
             <p className="text-sm uppercase tracking-widest font-medium opacity-60">Premium Projects</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="bg-charcoal text-white py-32 border-t border-white/5 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/5 to-transparent pointer-events-none"></div>
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-20 relative z-10">
+          <span className="text-[10px] font-bold tracking-[0.4em] uppercase text-primary mb-12 block text-center md:text-left">Client Narratives</span>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-8 relative min-h-[300px] flex items-center">
+              {TESTIMONIALS.map((testimonial, index) => (
+                <div 
+                  key={index}
+                  className={`transition-all duration-1000 absolute inset-0 flex flex-col justify-center ${
+                    index === activeTestimonial ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8 pointer-events-none'
+                  }`}
+                >
+                  <span className="font-headline text-6xl text-primary opacity-20 mb-4">"</span>
+                  <p className="font-headline text-3xl md:text-5xl font-light leading-tight mb-8 uppercase">
+                    {testimonial.quote}
+                  </p>
+                  <div className="flex items-center gap-4">
+                     <div className="h-px w-12 bg-primary"></div>
+                     <div>
+                       <p className="text-xs font-bold uppercase tracking-[0.2em]">{testimonial.author}</p>
+                       <p className="text-[10px] text-white/40 uppercase tracking-widest mt-1">{testimonial.role}, {testimonial.location}</p>
+                     </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="lg:col-span-4 flex lg:justify-end">
+              <div className="flex flex-col gap-4">
+                {TESTIMONIALS.map((_, index) => (
+                  <button 
+                    key={index}
+                    onClick={() => setActiveTestimonial(index)}
+                    className={`w-12 h-1 transition-all duration-500 ${
+                      index === activeTestimonial ? 'bg-primary w-24' : 'bg-white/10 hover:bg-white/30'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

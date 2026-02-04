@@ -8,22 +8,32 @@ const Services: React.FC = () => {
   const [selectedService, setSelectedService] = useState<Service | null>(null);
 
   return (
-    <div className="pt-32 pb-24 bg-bg-light animate-in fade-in slide-in-from-bottom-4 duration-1000">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-20">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-charcoal/10 mb-16">
-          <div className="max-w-2xl">
-            <p className="text-primary text-sm font-bold uppercase tracking-[0.2em] mb-4">Core Capabilities</p>
-            <h1 className="text-charcoal text-5xl md:text-7xl font-headline font-extrabold uppercase leading-none tracking-tighter">Crafting <br/>Excellence.</h1>
-            <p className="mt-6 text-charcoal/60 text-lg font-light leading-relaxed">
-              From initial spatial planning to the final finishing touch, we offer a full spectrum of services tailored to high-end residential and commercial projects.
-            </p>
-          </div>
-          <div>
+    <div className="bg-bg-light animate-in fade-in slide-in-from-bottom-4 duration-500">
+      {/* Hero Section */}
+      <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center bg-charcoal overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&q=80&w=2000" 
+            alt="Services Hero" 
+            className="w-full h-full object-cover opacity-50"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 to-transparent"></div>
+        </div>
+        <div className="relative z-10 text-center max-w-4xl px-6">
+          <span className="text-primary font-headline text-xs font-bold uppercase tracking-[0.4em] mb-6 block animate-in fade-in slide-in-from-bottom-4 duration-700">Core Capabilities</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-headline font-extrabold text-white uppercase leading-none tracking-tighter mb-6 animate-in fade-in slide-in-from-bottom-8 duration-1000">Crafting <br/>Excellence</h1>
+          <p className="text-white/70 text-lg font-light leading-relaxed max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+            From initial spatial planning to the final finishing touch, we offer a full spectrum of services tailored to high-end residential and commercial projects.
+          </p>
+        </div>
+      </section>
+
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-20 py-24">
+        <div className="flex justify-end mb-12">
             <button className="flex items-center gap-2 px-8 py-4 border border-charcoal/10 hover:border-primary text-charcoal text-[10px] font-bold uppercase tracking-widest transition-all">
               <span>Our Process</span>
               <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
             </button>
-          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-charcoal/10">

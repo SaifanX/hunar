@@ -3,16 +3,30 @@ import React from 'react';
 
 const Contact: React.FC = () => {
   return (
-    <div className="pt-32 pb-24 bg-bg-light animate-in fade-in slide-in-from-bottom-4 duration-1000">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-20">
+    <div className="bg-bg-light animate-in fade-in slide-in-from-bottom-4 duration-500">
+      {/* Hero Section */}
+      <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center bg-charcoal overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=2000" 
+            alt="Contact Hero" 
+            className="w-full h-full object-cover opacity-50"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 to-transparent"></div>
+        </div>
+        <div className="relative z-10 text-center max-w-4xl px-6">
+          <span className="text-primary font-headline text-xs font-bold uppercase tracking-[0.4em] mb-6 block animate-in fade-in slide-in-from-bottom-4 duration-700">Get In Touch</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-headline font-extrabold text-white uppercase leading-none tracking-tighter mb-6 animate-in fade-in slide-in-from-bottom-8 duration-1000">Let's Build <br/>Your Legacy</h1>
+          <p className="text-white/70 text-lg font-light leading-relaxed max-w-xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+             Whether you're planning a bespoke residence or a large-scale commercial project, our team is ready to bring precision and luxury to your vision.
+          </p>
+        </div>
+      </section>
+
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-20 py-24">
         <div className="grid lg:grid-cols-2 gap-24">
           <div>
-            <span className="text-primary font-headline text-xs font-bold uppercase tracking-[0.3em] mb-4 block">Get In Touch</span>
-            <h1 className="text-5xl md:text-7xl font-headline font-extrabold uppercase leading-none tracking-tighter mb-8">Let's build <br/>your legacy.</h1>
-            <p className="text-charcoal/60 text-lg font-light leading-relaxed mb-12 max-w-lg">
-              Whether you're planning a bespoke residence or a large-scale commercial project, our team is ready to bring precision and luxury to your vision.
-            </p>
-
+            <h3 className="text-3xl font-headline font-bold uppercase mb-12">Contact Information</h3>
             <div className="space-y-10">
               <div className="flex items-start gap-6">
                 <span className="material-symbols-outlined text-primary text-3xl">location_on</span>
@@ -38,8 +52,7 @@ const Contact: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white p-10 md:p-16 shadow-sm border border-charcoal/5 relative">
-            <div className="absolute top-0 right-0 w-24 h-24 border-t border-r border-primary/20"></div>
+          <div className="bg-white p-10 md:p-16 shadow-2xl border-t-4 border-primary relative -mt-32 z-20">
             <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="flex flex-col gap-2">

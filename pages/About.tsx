@@ -3,7 +3,7 @@ import React from 'react';
 
 const About: React.FC = () => {
   return (
-    <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
+    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
       {/* Identity Section */}
       <section className="relative min-h-[70vh] flex items-center bg-charcoal text-white overflow-hidden pt-24">
         <div className="absolute inset-0 opacity-40">

@@ -14,24 +14,23 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Determine if the current page has a light header area
-  const isLightPage = ['/projects', '/services', '/contact'].includes(location.pathname);
-  
-  // Header background logic: Dark if scrolled OR if we're on a page that starts with a light background
-  const headerBgClass = (isScrolled || isLightPage) 
-    ? 'bg-charcoal-nav py-4 shadow-xl' 
-    : 'bg-transparent py-6';
+  // Header styles:
+  // 1. Scrolled: Floating island, glassmorphism, rounded corners
+  // 2. Top: Full width, transparent (All pages now have hero images)
+  const headerClass = isScrolled 
+    ? 'top-4 inset-x-4 rounded-2xl bg-charcoal/85 backdrop-blur-md shadow-2xl py-3 px-6 md:px-10' 
+    : 'top-0 inset-x-0 bg-transparent py-6 px-6 lg:px-20';
 
   const links = [{ name: 'Home', path: '/' }, ...NAV_LINKS];
 
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header */}
-      <header className={`fixed top-0 z-50 w-full transition-all duration-300 ${headerBgClass}`}>
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-20 flex items-center justify-between">
+      <header className={`fixed z-50 transition-[top,left,right,padding,border-radius,background-color] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${headerClass}`}>
+        <div className="max-w-[1440px] mx-auto flex items-center justify-between">
           <Link to="/" className="flex items-center group">
-            <div className="relative w-[36px] h-[40px] border-[4px] border-primary flex items-center justify-center">
-              <span className="text-white font-headline text-xl font-extrabold">H</span>
+            <div className="relative w-[36px] h-[40px] border-[4px] border-primary flex items-center justify-center transition-transform duration-500 group-hover:rotate-180">
+              <span className="text-white font-headline text-xl font-extrabold group-hover:rotate-180 transition-transform duration-500">H</span>
             </div>
             <div className="ml-4 flex flex-col justify-center">
               <h1 className="font-headline text-xl tracking-[0.05em] leading-none font-extrabold text-white uppercase group-hover:text-primary transition-colors">HUNAR</h1>
@@ -44,22 +43,22 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <Link 
                 key={link.path} 
                 to={link.path}
-                className={`text-[10px] font-bold tracking-[0.2em] uppercase transition-colors relative group/link ${
-                  location.pathname === link.path ? 'text-primary' : 'text-white/70 hover:text-white'
+                className={`text-[10px] font-bold tracking-[0.2em] uppercase transition-colors relative group/link py-2 ${
+                  location.pathname === link.path ? 'text-primary' : 'text-white/70 hover:text-primary'
                 }`}
               >
                 {link.name}
-                <span className={`absolute -bottom-1 left-0 h-[2px] bg-primary transition-all duration-300 ${location.pathname === link.path ? 'w-full' : 'w-0 group-hover/link:w-full'}`}></span>
+                <span className={`absolute bottom-0 left-0 h-[2px] bg-primary transition-all duration-300 ease-out ${location.pathname === link.path ? 'w-full' : 'w-0 group-hover/link:w-full'}`}></span>
               </Link>
             ))}
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link to="/contact" className="hidden lg:flex items-center justify-center px-6 h-10 border border-primary text-primary text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-primary hover:text-white transition-all">
+            <Link to="/contact" className="hidden lg:flex items-center justify-center px-6 h-10 border border-primary text-primary text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-primary hover:text-white transition-all duration-300">
               Request Quote
             </Link>
             <button 
-              className="md:hidden text-white p-2"
+              className="md:hidden text-white p-2 hover:text-primary transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               <span className="material-symbols-outlined">{isMobileMenuOpen ? 'close' : 'menu'}</span>
@@ -70,8 +69,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[60] bg-charcoal-nav flex flex-col items-center justify-center gap-8 p-10 md:hidden animate-in fade-in duration-300">
-          <button className="absolute top-10 right-10 text-white" onClick={() => setIsMobileMenuOpen(false)}>
+        <div className="fixed inset-0 z-[60] bg-charcoal/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 p-10 md:hidden animate-in fade-in duration-300">
+          <button className="absolute top-10 right-10 text-white hover:text-primary transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
             <span className="material-symbols-outlined text-4xl">close</span>
           </button>
           {links.map((link) => (
@@ -88,7 +87,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           ))}
           <Link 
             to="/contact"
-            className="mt-8 px-10 py-4 border border-primary text-primary text-[12px] font-bold tracking-[0.2em] uppercase"
+            className="mt-8 px-10 py-4 border border-primary text-primary text-[12px] font-bold tracking-[0.2em] uppercase hover:bg-primary hover:text-white transition-all"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Inquire Now

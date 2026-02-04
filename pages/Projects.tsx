@@ -14,20 +14,29 @@ const Projects: React.FC = () => {
     : PROJECTS.filter(p => p.category === filter);
 
   return (
-    <div className="pt-32 pb-24 bg-bg-light animate-in fade-in slide-in-from-bottom-4 duration-1000">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-20">
-        <section className="mb-12">
-          <div className="max-w-3xl">
-            <span className="text-primary font-headline text-xs font-bold uppercase tracking-[0.2em] mb-4 block">Selected Works</span>
-            <h2 className="text-5xl lg:text-7xl font-headline font-light leading-[1.1] tracking-tighter mb-6 uppercase">Our Portfolio</h2>
-            <p className="text-charcoal/60 text-lg font-light leading-relaxed">
-              Crafting Spaces, Building Legacies. Explore our curated selection of high-end architectural transformations powered by engineering excellence.
-            </p>
-          </div>
-        </section>
+    <div className="bg-bg-light animate-in fade-in slide-in-from-bottom-4 duration-500">
+      {/* Hero Section */}
+      <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center bg-charcoal overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+            src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=2000" 
+            alt="Projects Hero" 
+            className="w-full h-full object-cover opacity-60"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal to-transparent opacity-80"></div>
+        </div>
+        <div className="relative z-10 text-center max-w-4xl px-6">
+          <span className="text-primary font-headline text-xs font-bold uppercase tracking-[0.4em] mb-6 block animate-in fade-in slide-in-from-bottom-4 duration-700">Selected Works</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-headline font-extrabold text-white uppercase leading-none tracking-tighter mb-6 animate-in fade-in slide-in-from-bottom-8 duration-1000">Our Portfolio</h1>
+          <p className="text-white/70 text-lg font-light leading-relaxed max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+            Crafting Spaces, Building Legacies. Explore our curated selection of high-end architectural transformations powered by engineering excellence.
+          </p>
+        </div>
+      </section>
 
-        <section className="mb-16">
-          <div className="flex flex-wrap gap-4 items-center">
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-20 py-24">
+        <section className="mb-16 flex flex-col items-center">
+          <div className="flex flex-wrap justify-center gap-4 items-center">
             {categories.map(cat => (
               <button 
                 key={cat}
@@ -52,7 +61,7 @@ const Projects: React.FC = () => {
               <img 
                 src={project.image} 
                 alt={project.title} 
-                className="absolute inset-0 w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700"
+                className="absolute inset-0 w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700 animate-in fade-in duration-1000"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent flex flex-col justify-end p-10 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
                 <span className="text-primary text-[10px] font-bold tracking-[0.3em] uppercase mb-2">{project.category}</span>

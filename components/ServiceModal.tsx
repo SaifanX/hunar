@@ -16,7 +16,7 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
         className="absolute inset-0 bg-charcoal/95 backdrop-blur-md" 
         onClick={onClose}
       />
-      <div className="relative w-full max-w-5xl bg-white overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh] animate-in slide-in-from-bottom-8 duration-500">
+      <div className="relative w-full max-w-5xl bg-white overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh] animate-in slide-in-from-bottom-8 duration-300">
         <button 
           onClick={onClose}
           className="absolute top-6 right-6 z-10 w-12 h-12 bg-charcoal text-white flex items-center justify-center hover:bg-primary transition-colors"
