@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { NAV_LINKS } from '../constants';
+import QuickActionHub from './QuickActionHub';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -14,14 +15,12 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Header styles:
-  // 1. Scrolled: Floating island, glassmorphism, rounded corners
-  // 2. Top: Full width, transparent (All pages now have hero images)
   const headerClass = isScrolled 
     ? 'top-4 inset-x-4 rounded-2xl bg-charcoal/85 backdrop-blur-md shadow-2xl py-3 px-6 md:px-10' 
     : 'top-0 inset-x-0 bg-transparent py-6 px-6 lg:px-20';
 
   const links = [{ name: 'Home', path: '/' }, ...NAV_LINKS];
+  const mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.016403055426!2d77.5685161750753!3d12.906666687402774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15f17ca16937%3A0x1394a04740953861!2sMBSYS!5e0!3m2!1sen!2sin!4v1770295702156!5m2!1sen!2sin";
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -100,8 +99,33 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         {children}
       </main>
 
+      {/* Quick Action Hub */}
+      <QuickActionHub />
+
       {/* Footer */}
-      <footer className="bg-charcoal text-white pt-24 pb-12 border-t border-white/5">
+      <footer className="bg-charcoal text-white pt-24 border-t border-white/5">
+        {/* Footer Map Section */}
+        <div className="w-full mb-20 px-6 lg:px-20">
+          <div className="relative h-[400px] w-full group overflow-hidden border border-white/10 rounded-sm">
+            <div className="absolute inset-0 bg-charcoal z-10 opacity-30 group-hover:opacity-0 transition-opacity duration-700 pointer-events-none"></div>
+            <iframe 
+              src={mapEmbedUrl}
+              width="100%" 
+              height="100%" 
+              style={{ border: 0, filter: 'grayscale(1) contrast(1.1) brightness(0.8)' }} 
+              allowFullScreen={true} 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              className="group-hover:grayscale-0 transition-all duration-1000"
+              title="HUNAR | MBSYS Studio Location"
+            />
+            <div className="absolute top-6 left-6 z-20 bg-charcoal/90 p-4 border-l-2 border-primary backdrop-blur-sm">
+              <span className="text-primary text-[9px] font-bold uppercase tracking-[0.3em]">Our Headquarters</span>
+              <h4 className="text-white text-xs font-bold uppercase tracking-widest mt-1">Visit the Studio</h4>
+            </div>
+          </div>
+        </div>
+
         <div className="max-w-[1440px] mx-auto px-6 lg:px-20 grid grid-cols-1 md:grid-cols-4 gap-16 mb-24">
           <div className="md:col-span-1">
             <div className="flex items-center mb-8">
@@ -109,7 +133,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 <span className="text-white font-headline font-bold">H</span>
               </div>
               <div className="ml-3 flex flex-col">
-                <span className="text-sm font-black tracking-widest leading-none">HUNAR</span>
+                <span className="text-sm font-black tracking-widest leading-none uppercase">HUNAR</span>
                 <span className="text-[6px] uppercase tracking-[0.3em] font-medium opacity-60">Interiors & Construction</span>
               </div>
             </div>
@@ -138,7 +162,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <div>
             <h5 className="text-[10px] uppercase tracking-[0.3em] font-bold text-primary mb-8">Connect</h5>
             <div className="space-y-4 text-xs font-light text-white/60">
-              <p>Ilyasnagar, Bangalore<br/>Karnataka, India</p>
+              <p>231, Zamann Manzil, 3rd Main Road,<br/>Ilyas Nagar, J.P. Nagar, Bengaluru,<br/>Karnataka 560111</p>
               <p>concierge@hunar.archi</p>
               <p>+91 98863 74122</p>
               <div className="flex gap-4 pt-4">
@@ -149,8 +173,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             </div>
           </div>
         </div>
-        <div className="max-w-[1440px] mx-auto px-6 lg:px-20 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-[8px] uppercase tracking-[0.4em] text-white/30">© 2024 HUNAR ARCHITECTURE & CONSTRUCTION. POWERED BY MBSYS.</p>
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-20 py-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+          <p className="text-[8px] uppercase tracking-[0.4em] text-white/30 text-center md:text-left">© 2024 HUNAR ARCHITECTURE & CONSTRUCTION. POWERED BY MBSYS.</p>
           <div className="flex gap-8">
             <span className="text-[8px] uppercase tracking-[0.4em] text-white/30 hover:text-white cursor-pointer transition-colors">Privacy Policy</span>
             <span className="text-[8px] uppercase tracking-[0.4em] text-white/30 hover:text-white cursor-pointer transition-colors">Terms of Service</span>

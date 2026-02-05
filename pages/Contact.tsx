@@ -2,6 +2,10 @@
 import React from 'react';
 
 const Contact: React.FC = () => {
+  const fullAddress = "231, Zamann Manzil, 3rd Main Road, Ilyas Nagar, J.P. Nagar, Bengaluru, Karnataka 560111";
+  const plusCode = "XHGJ+6W Bengaluru, Karnataka";
+  const mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.016403055426!2d77.5685161750753!3d12.906666687402774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15f17ca16937%3A0x1394a04740953861!2sMBSYS!5e0!3m2!1sen!2sin!4v1770295702156!5m2!1sen!2sin";
+
   return (
     <div className="bg-bg-light animate-in fade-in slide-in-from-bottom-4 duration-500">
       {/* Hero Section */}
@@ -32,7 +36,10 @@ const Contact: React.FC = () => {
                 <span className="material-symbols-outlined text-primary text-3xl">location_on</span>
                 <div>
                   <h4 className="font-bold text-xs uppercase tracking-widest mb-2">Our Studio</h4>
-                  <p className="text-charcoal/60 font-light text-sm">Ilyasnagar, Bangalore<br/>Karnataka, India</p>
+                  <p className="text-charcoal/60 font-light text-sm leading-relaxed">
+                    {fullAddress}<br/>
+                    <span className="text-primary font-bold text-[10px] tracking-widest mt-2 block">{plusCode}</span>
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-6">
@@ -52,7 +59,7 @@ const Contact: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white p-10 md:p-16 shadow-2xl border-t-4 border-primary relative -mt-32 z-20">
+          <div className="bg-white p-10 md:p-16 shadow-2xl border-t-4 border-primary relative lg:-mt-32 z-20">
             <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="flex flex-col gap-2">
@@ -84,6 +91,35 @@ const Contact: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Local Map Section (Redundant but detailed for Contact page) */}
+      <section className="w-full h-[500px] relative bg-charcoal grayscale hover:grayscale-0 transition-all duration-1000">
+        <iframe 
+          title="HUNAR Studio Location"
+          src={mapEmbedUrl}
+          width="100%" 
+          height="100%" 
+          style={{ border: 0 }} 
+          allowFullScreen={true} 
+          loading="lazy" 
+          referrerPolicy="no-referrer-when-downgrade"
+          className="opacity-70 hover:opacity-100 transition-opacity"
+        />
+        <div className="absolute bottom-8 right-8 bg-charcoal p-6 border border-primary hidden md:block">
+          <p className="text-white text-[10px] font-bold uppercase tracking-[0.3em] mb-2">Navigation Guide</p>
+          <p className="text-white/60 text-[9px] font-light leading-relaxed max-w-[200px]">
+            Located in the heart of J.P. Nagar, our studio is engineered for creative excellence. 
+          </p>
+          <a 
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-block text-primary text-[10px] font-bold uppercase tracking-widest hover:underline"
+          >
+            Open in Google Maps
+          </a>
+        </div>
+      </section>
     </div>
   );
 };

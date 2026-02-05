@@ -13,7 +13,7 @@ const Services: React.FC = () => {
       <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center bg-charcoal overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&q=80&w=2000" 
+            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=2000" 
             alt="Services Hero" 
             className="w-full h-full object-cover opacity-50"
           />
@@ -63,11 +63,11 @@ const Services: React.FC = () => {
             className="lg:col-span-3 group p-10 border-r border-b border-charcoal/10 hover:bg-white relative flex flex-col md:flex-row items-center gap-12 min-h-[400px] transition-all duration-500 cursor-pointer"
           >
             <div className="flex-shrink-0">
-              <span className="text-8xl font-black text-charcoal/5 group-hover:text-primary transition-colors">07</span>
+              <span className="text-8xl font-black text-charcoal/5 group-hover:text-primary transition-colors">03</span>
             </div>
             <div className="flex-grow flex flex-col md:flex-row gap-12 items-center">
               <div className="w-full md:w-1/2 overflow-hidden rounded-sm grayscale group-hover:grayscale-0 transition-all duration-700">
-                <img alt="Turnkey" className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-1000" src="https://images.unsplash.com/photo-1541913057-22102a3e7405?auto=format&fit=crop&q=80&w=1200" />
+                <img alt="Turnkey" className="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-1000" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=1200" />
               </div>
               <div className="w-full md:w-1/2">
                 <div className="flex items-center gap-4 mb-4">

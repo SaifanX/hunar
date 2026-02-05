@@ -50,7 +50,7 @@ export const SERVICES: Service[] = [
     title: 'Interior Design',
     description: 'Bespoke spatial planning and aesthetic curation tailored to your lifestyle and architectural requirements.',
     icon: 'home_work',
-    image: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=600'
+    image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=800'
   },
   {
     id: 's2',
@@ -58,7 +58,7 @@ export const SERVICES: Service[] = [
     title: 'Civil & Carpentry',
     description: 'Structural integrity meets custom fine woodwork. We handle everything from masonry to bespoke furniture.',
     icon: 'architecture',
-    image: 'https://images.unsplash.com/photo-1503387762-592dea58ef23?auto=format&fit=crop&q=80&w=600'
+    image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=800'
   },
   {
     id: 's3',
@@ -66,6 +66,6 @@ export const SERVICES: Service[] = [
     title: 'Turnkey Projects',
     description: 'End-to-end management from concept to completion. We deliver your vision flawlessly.',
     icon: 'verified',
-    image: 'https://images.unsplash.com/photo-1541888941257-60104aa396e9?auto=format&fit=crop&q=80&w=600'
+    image: 'https://images.unsplash.com/photo-1503387762-592dea58ef23?auto=format&fit=crop&q=80&w=800'
   }
 ];
