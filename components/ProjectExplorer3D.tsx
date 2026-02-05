@@ -8,12 +8,13 @@ interface WallProps {
   rotation?: [number, number, number];
 }
 
-const Wall: React.FC<WallProps> = memo(({ position, args, rotation = [0, 0, 0] }) => (
-  <mesh position={position} rotation={rotation}>
+// Fix: Use explicit tuple types for mesh properties and geometry args to satisfy Three.js/R3F strict typing
+const Wall: React.FC<WallProps> = memo(({ position, args, rotation = [0, 0, 0] as [number, number, number] }) => (
+  <mesh position={position as [number, number, number]} rotation={rotation as [number, number, number]}>
     <boxGeometry args={args} />
     <meshStandardMaterial color="#222" metalness={0.6} roughness={0.2} />
-    <mesh position={[0, 0, 0]}>
-      <boxGeometry args={[args[0] + 0.02, args[1] + 0.02, args[2] + 0.02]} />
+    <mesh position={[0, 0, 0] as [number, number, number]}>
+      <boxGeometry args={[args[0] + 0.02, args[1] + 0.02, args[2] + 0.02] as [number, number, number]} />
       <meshBasicMaterial color="#b18d59" wireframe />
     </mesh>
   </mesh>
@@ -23,13 +24,13 @@ const ArchitecturalModel: React.FC = memo(() => {
   return (
     <group>
       {/* Floor */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
+      <mesh rotation={[-Math.PI / 2, 0, 0] as [number, number, number]} position={[0, -0.5, 0] as [number, number, number]}>
         <planeGeometry args={[20, 20]} />
         <meshStandardMaterial color="#111" metalness={0.8} roughness={0.1} />
       </mesh>
       
       {/* Grid Helper */}
-      <gridHelper args={[20, 20, 0xb18d59, 0x333333]} position={[0, -0.49, 0]} />
+      <gridHelper args={[20, 20, 0xb18d59, 0x333333]} position={[0, -0.49, 0] as [number, number, number]} />
 
       {/* Basic Villa Layout Representation */}
       <Wall position={[-4, 1.5, -4]} args={[0.2, 4, 8]} />
@@ -42,7 +43,7 @@ const ArchitecturalModel: React.FC = memo(() => {
 
       {/* Floating Callouts */}
       <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-        <Html position={[-4, 3, -4]} distanceFactor={10} center>
+        <Html position={[-4, 3, -4] as [number, number, number]} distanceFactor={10} center>
           <div className="bg-primary/90 backdrop-blur px-3 py-1 text-white text-[8px] font-bold uppercase tracking-widest whitespace-nowrap pointer-events-none shadow-xl border border-white/20">
             Load Bearing Column A1
           </div>
@@ -50,7 +51,7 @@ const ArchitecturalModel: React.FC = memo(() => {
       </Float>
 
       <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
-        <Html position={[2, 2.5, -7]} distanceFactor={10} center>
+        <Html position={[2, 2.5, -7] as [number, number, number]} distanceFactor={10} center>
           <div className="bg-charcoal/90 backdrop-blur px-3 py-1 text-primary border border-primary text-[8px] font-bold uppercase tracking-widest whitespace-nowrap pointer-events-none shadow-xl">
             HVAC Core Integration
           </div>
@@ -58,7 +59,7 @@ const ArchitecturalModel: React.FC = memo(() => {
       </Float>
 
       <Float speed={2.5} rotationIntensity={0.5} floatIntensity={0.5}>
-        <Html position={[0, 0, 2]} distanceFactor={10} center>
+        <Html position={[0, 0, 2] as [number, number, number]} distanceFactor={10} center>
           <div className="bg-white/10 backdrop-blur px-4 py-2 text-white border border-white/20 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap pointer-events-none shadow-xl">
             Precision BIM Layer: 14.02
           </div>
@@ -66,7 +67,7 @@ const ArchitecturalModel: React.FC = memo(() => {
       </Float>
 
       {/* Central Aesthetic Element */}
-      <mesh position={[0, 0, -4]}>
+      <mesh position={[0, 0, -4] as [number, number, number]}>
         <boxGeometry args={[1, 0.1, 1]} />
         <meshStandardMaterial color="#b18d59" emissive="#b18d59" emissiveIntensity={0.5} />
       </mesh>
@@ -109,13 +110,13 @@ const ProjectExplorer3D: React.FC = () => {
           />
           
           <ambientLight intensity={0.4} />
-          <pointLight position={[10, 10, 10]} intensity={1.5} castShadow />
-          <spotLight position={[-10, 15, 10]} angle={0.3} penumbra={1} intensity={2} castShadow />
+          <pointLight position={[10, 10, 10] as [number, number, number]} intensity={1.5} castShadow />
+          <spotLight position={[-10, 15, 10] as [number, number, number]} angle={0.3} penumbra={1} intensity={2} castShadow />
           
           <ArchitecturalModel />
           
           <Environment preset="city" />
-          <ContactShadows position={[0, -0.49, 0]} opacity={0.4} scale={20} blur={2} far={4.5} />
+          <ContactShadows position={[0, -0.49, 0] as [number, number, number]} opacity={0.4} scale={20} blur={2} far={4.5} />
         </Suspense>
       </Canvas>
       
