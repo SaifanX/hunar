@@ -1,4 +1,3 @@
-
 import { Project, Service, NavLink } from './types';
 
 export const NAV_LINKS: NavLink[] = [
@@ -15,7 +14,7 @@ export const PROJECTS: Project[] = [
     category: 'Residential',
     location: 'London, UK',
     image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200',
-    description: 'A radical reimagining of urban luxury, focusing on architectural light and raw material honesty.'
+    description: 'A radical reimagining of urban luxury, focusing on architectural light and raw material honesty. This project showcases the height of our structural precision.'
   },
   {
     id: '2',
