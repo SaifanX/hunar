@@ -1,6 +1,7 @@
 
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+// Changed import from react-router-dom to react-router to fix missing export errors
+import { useLocation } from 'react-router';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();

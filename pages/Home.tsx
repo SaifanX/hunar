@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { PROJECTS } from '../constants';
-import { Link } from 'react-router-dom';
+// Changed import from react-router-dom to react-router to fix missing export errors
+import { Link } from 'react-router';
 import Counter from '../components/Counter';
 
 const TESTIMONIALS = [

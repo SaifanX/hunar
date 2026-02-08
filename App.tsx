@@ -1,8 +1,9 @@
-
 import React, { Suspense, lazy } from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+// Changed import from react-router-dom to react-router to fix missing export errors
+import { HashRouter as Router, Routes, Route } from 'react-router';
 import Layout from './components/Layout';
 import ScrollToTop from './components/ScrollToTop';
+import CursorTrail from './components/CursorTrail';
 
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
@@ -23,6 +24,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
+      <CursorTrail />
       <Layout>
         <Suspense fallback={<LoadingFallback />}>
           <Routes>

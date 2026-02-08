@@ -1,16 +1,29 @@
 
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+// Changed import from react-router-dom to react-router to fix missing export errors
+import { Link, useLocation } from 'react-router';
 import { NAV_LINKS } from '../constants';
 import QuickActionHub from './QuickActionHub';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => {
+      // Toggle header state
+      setIsScrolled(window.scrollY > 20);
+
+      // Calculate scroll progress
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const progress = (window.scrollY / totalHeight) * 100;
+        setScrollProgress(progress);
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -24,6 +37,12 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   return (
     <div className="flex flex-col min-h-screen">
+      {/* Scroll Progress Bar */}
+      <div 
+        className="fixed top-0 left-0 h-[2px] bg-primary z-[70] transition-all duration-100 ease-out pointer-events-none"
+        style={{ width: `${scrollProgress}%` }}
+      />
+
       {/* Header */}
       <header className={`fixed z-50 transition-[top,left,right,padding,border-radius,background-color] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${headerClass}`}>
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">

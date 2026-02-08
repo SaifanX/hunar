@@ -1,7 +1,38 @@
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router';
 
 const Contact: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const serviceParam = searchParams.get('service');
+  
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    inquiryType: 'Residential Interior',
+    details: ''
+  });
+
+  useEffect(() => {
+    // If a service was passed in the URL, try to pre-select it
+    if (serviceParam) {
+      // Map potential URL titles to dropdown values
+      const availableTypes = [
+        'Interior Design', 
+        'Civil & Carpentry', 
+        'Turnkey Projects',
+        'Residential Interior', 
+        'Turnkey Construction', 
+        'Project Management', 
+        'Design Consultation'
+      ];
+      
+      const matched = availableTypes.find(t => t.toLowerCase() === serviceParam.toLowerCase());
+      if (matched) {
+        setFormData(prev => ({ ...prev, inquiryType: matched }));
+      }
+    }
+  }, [serviceParam]);
+
   const fullAddress = "231, Zamann Manzil, 3rd Main Road, Ilyas Nagar, J.P. Nagar, Bengaluru, Karnataka 560111";
   const plusCode = "XHGJ+6W Bengaluru, Karnataka";
   const mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.016403055426!2d77.5685161750753!3d12.906666687402774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15f17ca16937%3A0x1394a04740953861!2sMBSYS!5e0!3m2!1sen!2sin!4v1770295702156!5m2!1sen!2sin";
@@ -64,25 +95,52 @@ const Contact: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="flex flex-col gap-2">
                   <label className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40">Full Name</label>
-                  <input type="text" className="border-b border-charcoal/10 py-3 focus:outline-none focus:border-primary transition-colors bg-transparent" placeholder="John Doe" />
+                  <input 
+                    type="text" 
+                    className="border-b border-charcoal/10 py-3 focus:outline-none focus:border-primary transition-colors bg-transparent" 
+                    placeholder="John Doe"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  />
                 </div>
                 <div className="flex flex-col gap-2">
                   <label className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40">Email Address</label>
-                  <input type="email" className="border-b border-charcoal/10 py-3 focus:outline-none focus:border-primary transition-colors bg-transparent" placeholder="john@example.com" />
+                  <input 
+                    type="email" 
+                    className="border-b border-charcoal/10 py-3 focus:outline-none focus:border-primary transition-colors bg-transparent" 
+                    placeholder="john@example.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
                 </div>
               </div>
               <div className="flex flex-col gap-2">
                 <label className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40">Inquiry Type</label>
-                <select className="border-b border-charcoal/10 py-3 focus:outline-none focus:border-primary transition-colors bg-transparent appearance-none">
-                  <option>Residential Interior</option>
-                  <option>Turnkey Construction</option>
-                  <option>Project Management</option>
-                  <option>Design Consultation</option>
-                </select>
+                <div className="relative">
+                  <select 
+                    className="w-full border-b border-charcoal/10 py-3 focus:outline-none focus:border-primary transition-colors bg-transparent appearance-none rounded-none"
+                    value={formData.inquiryType}
+                    onChange={(e) => setFormData({ ...formData, inquiryType: e.target.value })}
+                  >
+                    <option value="Interior Design">Interior Design</option>
+                    <option value="Civil & Carpentry">Civil & Carpentry</option>
+                    <option value="Turnkey Projects">Turnkey Projects</option>
+                    <option value="Residential Interior">Residential Interior</option>
+                    <option value="Turnkey Construction">Turnkey Construction</option>
+                    <option value="Project Management">Project Management</option>
+                    <option value="Design Consultation">Design Consultation</option>
+                  </select>
+                  <span className="material-symbols-outlined absolute right-0 bottom-3 pointer-events-none text-charcoal/40">expand_more</span>
+                </div>
               </div>
               <div className="flex flex-col gap-2">
                 <label className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40">Project Details</label>
-                <textarea className="border-b border-charcoal/10 py-3 h-32 resize-none focus:outline-none focus:border-primary transition-colors bg-transparent" placeholder="Tell us about your vision..."></textarea>
+                <textarea 
+                  className="border-b border-charcoal/10 py-3 h-32 resize-none focus:outline-none focus:border-primary transition-colors bg-transparent" 
+                  placeholder="Tell us about your vision..."
+                  value={formData.details}
+                  onChange={(e) => setFormData({ ...formData, details: e.target.value })}
+                ></textarea>
               </div>
               <button className="w-full bg-charcoal text-white py-6 text-xs font-bold uppercase tracking-[0.3em] hover:bg-primary transition-all">
                 Submit Inquiry
@@ -92,7 +150,6 @@ const Contact: React.FC = () => {
         </div>
       </div>
 
-      {/* Local Map Section (Redundant but detailed for Contact page) */}
       <section className="w-full h-[500px] relative bg-charcoal grayscale hover:grayscale-0 transition-all duration-1000">
         <iframe 
           title="HUNAR Studio Location"

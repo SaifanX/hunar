@@ -1,6 +1,6 @@
-
 import React from 'react';
 import { Service } from '../types';
+import { Link } from 'react-router';
 
 interface ServiceModalProps {
   service: Service | null;
@@ -9,6 +9,13 @@ interface ServiceModalProps {
 
 const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
   if (!service) return null;
+
+  // Personalized high-end concierge message
+  const whatsappMessage = `Hello HUNAR Team, I am interested in your ${service.title} services. I would like to discuss a potential project and understand your process for ${service.title.toLowerCase()} specifically. Looking forward to hearing from you.`;
+  const whatsappUrl = `https://wa.me/919886374122?text=${encodeURIComponent(whatsappMessage)}`;
+  
+  // Create a URL-safe version of the service title for the contact form pre-selection
+  const contactLink = `/contact?service=${encodeURIComponent(service.title)}`;
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10 animate-in fade-in duration-300">
@@ -53,25 +60,38 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ service, onClose }) => {
             <section>
               <h4 className="text-[10px] font-bold text-charcoal uppercase tracking-[0.2em] mb-4 border-b border-charcoal/5 pb-2">Our Strategic Approach</h4>
               <p className="text-sm">
-                Execution of "{service.title}" at HUNAR is governed by the MBSYS quality framework. We integrate aesthetic ambition with technical viability through advanced simulations, rigorous material selection, and site-specific architectural coordination. Our goal is to transcend standard delivery by creating an experience that is as structurally sound as it is visually breathtaking.
+                Execution of "{service.title}" at HUNAR is governed by the MBSYS quality framework. We integrate aesthetic ambition with technical viability through advanced simulations, rigorous material selection, and site-specific architectural coordination.
               </p>
             </section>
 
             <section>
               <h4 className="text-[10px] font-bold text-charcoal uppercase tracking-[0.2em] mb-4 border-b border-charcoal/5 pb-2">Key Deliverables</h4>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-[11px] uppercase tracking-widest font-medium">
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary"></span> Comprehensive Design Intent</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary"></span> Technical Shop Drawings</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary"></span> BOQ & Material Schedules</li>
-                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary"></span> Site Management & Oversight</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary"></span> Technical Precision</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary"></span> Curated Materiality</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary"></span> Engineering Integration</li>
+                <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-primary"></span> Quality Assurance</li>
               </ul>
             </section>
           </div>
 
-          <div className="mt-16 pt-8 border-t border-charcoal/5">
-            <button className="w-full bg-charcoal text-white py-5 text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-primary transition-all">
-              Inquire About This Service
-            </button>
+          <div className="mt-16 pt-8 border-t border-charcoal/5 flex flex-col sm:flex-row gap-4">
+            <Link 
+              to={contactLink} 
+              onClick={onClose}
+              className="flex-1 bg-charcoal text-white py-5 text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-primary transition-all text-center"
+            >
+              Fill Inquiry Form
+            </Link>
+            <a 
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 border border-charcoal text-charcoal py-5 text-[10px] font-bold uppercase tracking-[0.3em] hover:bg-charcoal hover:text-white transition-all text-center flex items-center justify-center gap-2"
+            >
+              <span className="material-symbols-outlined text-[16px]">chat</span>
+              WhatsApp Inquiry
+            </a>
           </div>
         </div>
       </div>
