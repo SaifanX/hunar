@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 // Changed import from react-router-dom to react-router to fix missing export errors
 import { Link, useLocation } from 'react-router';

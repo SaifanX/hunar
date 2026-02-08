@@ -12,6 +12,8 @@ const Contact: React.FC = () => {
     details: ''
   });
 
+  const [result, setResult] = useState("");
+
   useEffect(() => {
     // If a service was passed in the URL, try to pre-select it
     if (serviceParam) {
@@ -32,6 +34,44 @@ const Contact: React.FC = () => {
       }
     }
   }, [serviceParam]);
+
+  const onSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setResult("Sending....");
+    
+    // Create form data for API submission
+    const submissionData = new FormData();
+    submissionData.append("access_key", "e3068bf8-3c15-4094-9444-225621b099e6");
+    submissionData.append("name", formData.name);
+    submissionData.append("email", formData.email);
+    submissionData.append("subject", `New Inquiry: ${formData.inquiryType}`);
+    submissionData.append("message", `Type: ${formData.inquiryType}\nDetails: ${formData.details}`);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: submissionData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult("Form Submitted Successfully");
+        setFormData({
+          name: '',
+          email: '',
+          inquiryType: 'Residential Interior',
+          details: ''
+        });
+      } else {
+        console.error("Error", data);
+        setResult(data.message || "Error submitting form");
+      }
+    } catch (error) {
+      console.error("Error submitting form", error);
+      setResult("Submission Error. Please try again.");
+    }
+  };
 
   const fullAddress = "231, Zamann Manzil, 3rd Main Road, Ilyas Nagar, J.P. Nagar, Bengaluru, Karnataka 560111";
   const plusCode = "XHGJ+6W Bengaluru, Karnataka";
@@ -91,11 +131,13 @@ const Contact: React.FC = () => {
           </div>
 
           <div className="bg-white p-10 md:p-16 shadow-2xl border-t-4 border-primary relative lg:-mt-32 z-20">
-            <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-8" onSubmit={onSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="flex flex-col gap-2">
                   <label className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40">Full Name</label>
                   <input 
+                    name="name"
+                    required
                     type="text" 
                     className="border-b border-charcoal/10 py-3 focus:outline-none focus:border-primary transition-colors bg-transparent" 
                     placeholder="John Doe"
@@ -106,6 +148,8 @@ const Contact: React.FC = () => {
                 <div className="flex flex-col gap-2">
                   <label className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40">Email Address</label>
                   <input 
+                    name="email"
+                    required
                     type="email" 
                     className="border-b border-charcoal/10 py-3 focus:outline-none focus:border-primary transition-colors bg-transparent" 
                     placeholder="john@example.com"
@@ -136,15 +180,24 @@ const Contact: React.FC = () => {
               <div className="flex flex-col gap-2">
                 <label className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40">Project Details</label>
                 <textarea 
+                  name="message"
+                  required
                   className="border-b border-charcoal/10 py-3 h-32 resize-none focus:outline-none focus:border-primary transition-colors bg-transparent" 
                   placeholder="Tell us about your vision..."
                   value={formData.details}
                   onChange={(e) => setFormData({ ...formData, details: e.target.value })}
                 ></textarea>
               </div>
-              <button className="w-full bg-charcoal text-white py-6 text-xs font-bold uppercase tracking-[0.3em] hover:bg-primary transition-all">
+              <button type="submit" className="w-full bg-charcoal text-white py-6 text-xs font-bold uppercase tracking-[0.3em] hover:bg-primary transition-all">
                 Submit Inquiry
               </button>
+              {result && (
+                <div className="mt-4 text-center">
+                  <span className={`text-[10px] uppercase tracking-widest font-bold ${result.includes('Successfully') ? 'text-green-600' : 'text-primary'}`}>
+                    {result}
+                  </span>
+                </div>
+              )}
             </form>
           </div>
         </div>
