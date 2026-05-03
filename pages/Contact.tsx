@@ -82,7 +82,7 @@ const Contact: React.FC = () => {
     <div className="bg-bg-light animate-in fade-in slide-in-from-bottom-4 duration-500">
       <SEO title="Get in Touch | Hunar Studio" description="Contact Hunar for bespoke architectural designs and premium construction projects in Bengaluru." />
       {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[550px] pt-24 flex items-center justify-center bg-charcoal overflow-hidden">
+      <section className="relative h-[60vh] min-h-[550px] pt-40 flex items-center justify-center bg-charcoal overflow-hidden">
         <div className="absolute inset-0">
           <img 
             src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=60&w=1920" 

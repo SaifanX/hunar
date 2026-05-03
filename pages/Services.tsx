@@ -12,7 +12,7 @@ const Services: React.FC = () => {
     <div className="bg-bg-light animate-in fade-in slide-in-from-bottom-4 duration-500">
       <SEO title="Premium Architectural Services | Hunar" description="Explore our core capabilities from spatial planning to turnkey construction, backed by precision engineering." />
       {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[550px] pt-24 flex items-center justify-center bg-charcoal overflow-hidden">
+      <section className="relative h-[60vh] min-h-[550px] pt-40 flex items-center justify-center bg-charcoal overflow-hidden">
         <div className="absolute inset-0">
           <img 
             src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=60&w=1920" 
