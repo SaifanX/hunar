@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { PROJECTS } from '../constants';
 // Changed import from react-router-dom to react-router to fix missing export errors
 import { Link } from 'react-router';
+import SEO from '../components/SEO';
 import Counter from '../components/Counter';
 
 const TESTIMONIALS = [
@@ -38,13 +39,16 @@ const Home: React.FC = () => {
 
   return (
     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <SEO />
       {/* Hero Section */}
       <section className="relative w-full min-h-screen flex items-center justify-center px-6 lg:px-20 py-20 overflow-hidden bg-charcoal">
         <div className="absolute inset-0 opacity-20 pointer-events-none">
           <div className="grid-line absolute inset-0"></div>
           <img 
-            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=2000" 
-            alt="Hero BG" 
+            src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=60&w=1920" 
+            alt="Premium Interior Architecture" 
+            width="1920"
+            height="1080"
             className="w-full h-full object-cover grayscale blur-[2px]"
           />
         </div>
@@ -55,18 +59,18 @@ const Home: React.FC = () => {
               <span className="h-px w-12 bg-primary"></span>
               <span className="text-[10px] font-bold tracking-[0.3em] uppercase">Est. 2008</span>
             </div>
-            <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl font-extrabold leading-[1.05] tracking-tight text-white uppercase animate-in fade-in slide-in-from-left-12 duration-1000">
-              CRAFTING <br/> EXCELLENCE <br/>
+            <h1 className="font-headline text-[clamp(2.5rem,8vw,5rem)] md:text-[clamp(4rem,10vw,8rem)] font-extrabold leading-[1.05] tracking-tight text-white uppercase animate-in fade-in slide-in-from-left-12 duration-1000">
+              HUNAR <br/> CRAFTING <br/> EXCELLENCE <br/>
               <span className="text-primary italic">IN STRUCTURE</span>
             </h1>
             <p className="max-w-xl text-lg text-white/70 font-light leading-relaxed animate-in fade-in slide-in-from-left-16 duration-1000 delay-200">
               Premium architectural design and turnkey construction services. Powered by MBSYS engineering to ensure precision, innovation, and timeless luxury.
             </p>
             <div className="flex flex-wrap gap-4 pt-4 animate-in fade-in slide-in-from-left-20 duration-1000 delay-300">
-              <Link to="/projects" className="bg-primary text-white px-10 py-5 text-[12px] font-bold tracking-[0.2em] uppercase hover:brightness-110 transition-all text-center">
+              <Link to="/projects" aria-label="Explore our architectural projects" className="bg-primary text-white px-10 py-5 text-[12px] font-bold tracking-[0.2em] uppercase hover:brightness-110 transition-all text-center min-w-[200px]">
                 Explore Projects
               </Link>
-              <Link to="/contact" className="border border-white/20 text-white px-10 py-5 text-[12px] font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-charcoal transition-all text-center">
+              <Link to="/contact" aria-label="Contact us for a quote" className="border border-white/20 text-white px-10 py-5 text-[12px] font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-charcoal transition-all text-center min-w-[200px]">
                 Contact Us
               </Link>
             </div>
@@ -74,9 +78,11 @@ const Home: React.FC = () => {
           <div className="lg:col-span-5 relative hidden lg:block animate-in fade-in slide-in-from-right-12 duration-1000">
             <div className="aspect-[4/5] w-full relative">
               <img 
-                src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200" 
+                src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=60&w=1200" 
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 border border-white/10" 
-                alt="Architecture" 
+                alt="Modern Architectural Detail" 
+                width="800"
+                height="1000"
               />
               <div className="absolute -top-4 -right-4 w-32 h-32 border-t border-r border-primary opacity-50"></div>
               <div className="absolute -bottom-4 -left-4 w-32 h-32 border-b border-l border-primary opacity-50"></div>
@@ -195,8 +201,11 @@ const Home: React.FC = () => {
               <div key={project.id} className="group relative overflow-hidden aspect-[3/4] bg-charcoal">
                 <img 
                   className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" 
-                  src={project.image} 
-                  alt={project.title}
+                  src={`${project.image.split('&q=')[0]}&q=60&w=800`} 
+                  alt={`Hunar Project: ${project.title}`}
+                  loading="lazy"
+                  width="600"
+                  height="800"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 to-transparent flex flex-col justify-end p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                   <span className="text-[10px] font-bold tracking-[0.2em] text-primary uppercase mb-2">{project.category}</span>

@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #b18d59;
+  --color-charcoal: #171512;
+  --color-charcoal-nav: #1E1E1E;
+  --color-bg-light: #fbfaf9;
+  
+  --font-display: "Inter", "sans-serif";
+  --font-headline: "Sora", "sans-serif";
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #171512; /* Speed Demon: Prevent white flash */
+  }
+  
+  body {
+    @apply font-display bg-charcoal text-white selection:bg-primary selection:text-white antialiased;
+  }
+
+  /* Premium Image Reveal */
+  img {
+    @apply transition-all duration-1000 ease-out;
+  }
+
+  /* Global Section Containment for Ultra-Wide */
+  section {
+    @apply w-full overflow-hidden;
+  }
+}
+
+@layer components {
+  .grid-line {
+    background-image: linear-gradient(to right, #e0dcd6 1px, transparent 1px), linear-gradient(to bottom, #e0dcd6 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* High-Performance Card Hover */
+  .premium-card {
+    @apply relative overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2;
+  }
+}
+
+@layer utilities {
+  /* Speed Demon Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #171512;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #b18d59;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d4ac75;
+  }
+
+  .text-fluid-h1 {
+    font-size: clamp(2.5rem, 8vw, 8rem);
+  }
+}

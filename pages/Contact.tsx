@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router';
+import SEO from '../components/SEO';
 
 const Contact: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -79,19 +80,22 @@ const Contact: React.FC = () => {
 
   return (
     <div className="bg-bg-light animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <SEO title="Get in Touch | Hunar Studio" description="Contact Hunar for bespoke architectural designs and premium construction projects in Bengaluru." />
       {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center bg-charcoal overflow-hidden">
+      <section className="relative h-[60vh] min-h-[550px] pt-24 flex items-center justify-center bg-charcoal overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=2000" 
-            alt="Contact Hero" 
+            src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=60&w=1920" 
+            alt="Corporate Studio Environment" 
+            width="1920"
+            height="1080"
             className="w-full h-full object-cover opacity-50"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 to-transparent"></div>
         </div>
         <div className="relative z-10 text-center max-w-4xl px-6">
           <span className="text-primary font-headline text-xs font-bold uppercase tracking-[0.4em] mb-6 block animate-in fade-in slide-in-from-bottom-4 duration-700">Get In Touch</span>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-headline font-extrabold text-white uppercase leading-none tracking-tighter mb-6 animate-in fade-in slide-in-from-bottom-8 duration-1000">Let's Build <br/>Your Legacy</h1>
+          <h1 className="text-[clamp(2.5rem,8vw,5rem)] md:text-[clamp(4rem,10vw,8rem)] font-headline font-extrabold text-white uppercase leading-none tracking-tighter mb-6 animate-in fade-in slide-in-from-bottom-8 duration-1000">Let's Build <br/>Your Legacy</h1>
           <p className="text-white/70 text-lg font-light leading-relaxed max-w-xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
              Whether you're planning a bespoke residence or a large-scale commercial project, our team is ready to bring precision and luxury to your vision.
           </p>
@@ -104,38 +108,39 @@ const Contact: React.FC = () => {
             <h3 className="text-3xl font-headline font-bold uppercase mb-12">Contact Information</h3>
             <div className="space-y-10">
               <div className="flex items-start gap-6">
-                <span className="material-symbols-outlined text-primary text-3xl">location_on</span>
+                <span className="material-symbols-outlined text-primary text-3xl" aria-hidden="true">location_on</span>
                 <div>
                   <h4 className="font-bold text-xs uppercase tracking-widest mb-2">Our Studio</h4>
-                  <p className="text-charcoal/60 font-light text-sm leading-relaxed">
+                  <address className="text-charcoal/60 font-light text-sm leading-relaxed not-italic">
                     {fullAddress}<br/>
                     <span className="text-primary font-bold text-[10px] tracking-widest mt-2 block">{plusCode}</span>
-                  </p>
+                  </address>
                 </div>
               </div>
               <div className="flex items-start gap-6">
-                <span className="material-symbols-outlined text-primary text-3xl">mail</span>
+                <span className="material-symbols-outlined text-primary text-3xl" aria-hidden="true">mail</span>
                 <div>
                   <h4 className="font-bold text-xs uppercase tracking-widest mb-2">Email Concierge</h4>
-                  <p className="text-charcoal/60 font-light text-sm">concierge@hunar.archi</p>
+                  <p className="text-charcoal/60 font-light text-sm"><a href="mailto:concierge@hunar.archi" className="hover:text-primary transition-colors">concierge@hunar.archi</a></p>
                 </div>
               </div>
               <div className="flex items-start gap-6">
-                <span className="material-symbols-outlined text-primary text-3xl">call</span>
+                <span className="material-symbols-outlined text-primary text-3xl" aria-hidden="true">call</span>
                 <div>
                   <h4 className="font-bold text-xs uppercase tracking-widest mb-2">Direct Line</h4>
-                  <p className="text-charcoal/60 font-light text-sm">+91 98863 74122</p>
+                  <p className="text-charcoal/60 font-light text-sm"><a href="tel:+919886374122" className="hover:text-primary transition-colors">+91 98863 74122</a></p>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="bg-white p-10 md:p-16 shadow-2xl border-t-4 border-primary relative lg:-mt-32 z-20">
-            <form className="space-y-8" onSubmit={onSubmit}>
+            <form className="space-y-8" onSubmit={onSubmit} aria-label="Inquiry Form">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="flex flex-col gap-2">
-                  <label className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40">Full Name</label>
+                  <label htmlFor="full-name" className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40">Full Name</label>
                   <input 
+                    id="full-name"
                     name="name"
                     required
                     type="text" 
@@ -146,8 +151,9 @@ const Contact: React.FC = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40">Email Address</label>
+                  <label htmlFor="email-address" className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40">Email Address</label>
                   <input 
+                    id="email-address"
                     name="email"
                     required
                     type="email" 
@@ -159,9 +165,10 @@ const Contact: React.FC = () => {
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40">Inquiry Type</label>
+                <label htmlFor="inquiry-type" className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40">Inquiry Type</label>
                 <div className="relative">
                   <select 
+                    id="inquiry-type"
                     className="w-full border-b border-charcoal/10 py-3 focus:outline-none focus:border-primary transition-colors bg-transparent appearance-none rounded-none"
                     value={formData.inquiryType}
                     onChange={(e) => setFormData({ ...formData, inquiryType: e.target.value })}
@@ -174,12 +181,13 @@ const Contact: React.FC = () => {
                     <option value="Project Management">Project Management</option>
                     <option value="Design Consultation">Design Consultation</option>
                   </select>
-                  <span className="material-symbols-outlined absolute right-0 bottom-3 pointer-events-none text-charcoal/40">expand_more</span>
+                  <span className="material-symbols-outlined absolute right-0 bottom-3 pointer-events-none text-charcoal/40" aria-hidden="true">expand_more</span>
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40">Project Details</label>
+                <label htmlFor="project-details" className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40">Project Details</label>
                 <textarea 
+                  id="project-details"
                   name="message"
                   required
                   className="border-b border-charcoal/10 py-3 h-32 resize-none focus:outline-none focus:border-primary transition-colors bg-transparent" 
@@ -188,11 +196,15 @@ const Contact: React.FC = () => {
                   onChange={(e) => setFormData({ ...formData, details: e.target.value })}
                 ></textarea>
               </div>
-              <button type="submit" className="w-full bg-charcoal text-white py-6 text-xs font-bold uppercase tracking-[0.3em] hover:bg-primary transition-all">
-                Submit Inquiry
+              <button 
+                type="submit" 
+                aria-busy={result === "Sending...."}
+                className="w-full bg-charcoal text-white py-6 text-xs font-bold uppercase tracking-[0.3em] hover:bg-primary transition-all disabled:opacity-50"
+              >
+                {result === "Sending...." ? "Processing..." : "Submit Inquiry"}
               </button>
               {result && (
-                <div className="mt-4 text-center">
+                <div className="mt-4 text-center" role="status">
                   <span className={`text-[10px] uppercase tracking-widest font-bold ${result.includes('Successfully') ? 'text-green-600' : 'text-primary'}`}>
                     {result}
                   </span>

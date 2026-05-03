@@ -40,11 +40,16 @@ const QuickActionHub: React.FC = () => {
   return (
     <div className="fixed bottom-8 right-8 z-[100] flex flex-col items-end gap-4 group">
       {/* Action Menu */}
-      <div className={`flex flex-col gap-4 transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] origin-bottom ${
-        isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-50 opacity-0 translate-y-20 pointer-events-none'
-      }`}>
+      <div 
+        className={`flex flex-col gap-4 transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] origin-bottom ${
+          isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-50 opacity-0 translate-y-20 pointer-events-none'
+        }`}
+        role="menu"
+        aria-hidden={!isOpen}
+        aria-label="Quick action options"
+      >
         {actions.map((action, idx) => (
-          <div key={idx} className="flex items-center gap-4 group/item">
+          <div key={idx} className="flex items-center gap-4 group/item" role="none">
             <div className="bg-white/90 backdrop-blur-md px-4 py-2 border border-charcoal/5 shadow-xl transition-all duration-300 group-hover/item:border-primary">
               <p className="text-[9px] font-headline font-extrabold uppercase tracking-[0.2em] text-charcoal leading-none mb-1">{action.label}</p>
               <p className="text-[8px] text-charcoal/40 font-medium uppercase tracking-widest">{action.desc}</p>
@@ -55,17 +60,21 @@ const QuickActionHub: React.FC = () => {
                 href={action.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                role="menuitem"
+                aria-label={`Open ${action.label}: ${action.desc}`}
                 className="w-14 h-14 bg-primary text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 border border-white/20"
               >
-                <span className="material-symbols-outlined text-2xl">{action.icon}</span>
+                <span className="material-symbols-outlined text-2xl" aria-hidden="true">{action.icon}</span>
               </a>
             ) : (
               <Link
                 to={action.href}
                 onClick={() => setIsOpen(false)}
+                role="menuitem"
+                aria-label={`Navigate to ${action.label}`}
                 className="w-14 h-14 bg-primary text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 border border-white/20"
               >
-                <span className="material-symbols-outlined text-2xl">{action.icon}</span>
+                <span className="material-symbols-outlined text-2xl" aria-hidden="true">{action.icon}</span>
               </Link>
             )}
           </div>
@@ -75,19 +84,22 @@ const QuickActionHub: React.FC = () => {
       {/* Main Trigger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
+        aria-label={isOpen ? "Close quick actions" : "Open quick actions"}
         className={`relative w-16 h-16 flex items-center justify-center transition-all duration-700 shadow-[0_20px_50px_rgba(0,0,0,0.3)] group-hover:shadow-primary/20 ${
           isOpen ? 'bg-white text-charcoal rotate-[135deg]' : 'bg-charcoal text-white rotate-0'
         } border-2 border-primary/20 hover:border-primary`}
       >
         <div className="relative w-8 h-8 flex items-center justify-center">
             {/* Custom icon toggle animation */}
-            <span className={`material-symbols-outlined text-3xl absolute transition-all duration-500 ${isOpen ? 'opacity-0 scale-50' : 'opacity-100 scale-100'}`}>add</span>
-            <span className={`material-symbols-outlined text-3xl absolute transition-all duration-500 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}>close</span>
+            <span className={`material-symbols-outlined text-3xl absolute transition-all duration-500 ${isOpen ? 'opacity-0 scale-50' : 'opacity-100 scale-100'}`} aria-hidden="true">add</span>
+            <span className={`material-symbols-outlined text-3xl absolute transition-all duration-500 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`} aria-hidden="true">close</span>
         </div>
 
         {/* Sonar Pulse */}
         {!isOpen && (
-          <div className="absolute inset-0 bg-primary/30 animate-[ping_3s_infinite] pointer-events-none"></div>
+          <div className="absolute inset-0 bg-primary/30 animate-[ping_3s_infinite] pointer-events-none rounded-sm"></div>
         )}
       </button>
 
@@ -96,6 +108,7 @@ const QuickActionHub: React.FC = () => {
         <div 
             className="fixed inset-0 z-[-1] bg-charcoal/20 backdrop-blur-[2px]" 
             onClick={() => setIsOpen(false)}
+            aria-hidden="true"
         />
       )}
     </div>

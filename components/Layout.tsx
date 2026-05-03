@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-// Changed import from react-router-dom to react-router to fix missing export errors
-import { Link, useLocation } from 'react-router';
+// Standardized to react-router-dom for consistency
+import { Link, useLocation } from 'react-router-dom';
 import { NAV_LINKS } from '../constants';
 import QuickActionHub from './QuickActionHub';
+import BrandToggle from './BrandToggle';
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Layout: React.FC<{ children: React.ReactNode, onSwitchBrand: () => void }> = ({ children, onSwitchBrand }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -28,8 +29,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   }, []);
 
   const headerClass = isScrolled 
-    ? 'top-4 inset-x-4 rounded-2xl bg-charcoal/85 backdrop-blur-md shadow-2xl py-3 px-6 md:px-10' 
-    : 'top-0 inset-x-0 bg-transparent py-6 px-6 lg:px-20';
+    ? 'top-4 inset-x-4 rounded-2xl bg-charcoal/85 backdrop-blur-md shadow-2xl py-3 px-6 md:px-10 border border-white/5' 
+    : 'top-0 inset-x-0 bg-transparent py-6 px-6 lg:px-[clamp(1.5rem,5vw,5rem)]';
 
   const links = [{ name: 'Home', path: '/' }, ...NAV_LINKS];
   const mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.016403055426!2d77.5685161750753!3d12.906666687402774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15f17ca16937%3A0x1394a04740953861!2sMBSYS!5e0!3m2!1sen!2sin!4v1770295702156!5m2!1sen!2sin";
@@ -40,22 +41,26 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <div 
         className="fixed top-0 left-0 h-[2px] bg-primary z-[70] transition-all duration-100 ease-out pointer-events-none"
         style={{ width: `${scrollProgress}%` }}
+        role="progressbar"
+        aria-valuenow={scrollProgress}
+        aria-valuemin={0}
+        aria-valuemax={100}
       />
 
       {/* Header */}
       <header className={`fixed z-50 transition-[top,left,right,padding,border-radius,background-color] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] ${headerClass}`}>
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
-          <Link to="/" className="flex items-center group">
+          <Link to="/" aria-label="Hunar Home" className="flex items-center group">
             <div className="relative w-[36px] h-[40px] border-[4px] border-primary flex items-center justify-center transition-transform duration-500 group-hover:rotate-180">
               <span className="text-white font-headline text-xl font-extrabold group-hover:rotate-180 transition-transform duration-500">H</span>
             </div>
             <div className="ml-4 flex flex-col justify-center">
-              <h1 className="font-headline text-xl tracking-[0.05em] leading-none font-extrabold text-white uppercase group-hover:text-primary transition-colors">HUNAR</h1>
+              <h2 className="font-headline text-xl tracking-[0.05em] leading-none font-extrabold text-white uppercase group-hover:text-primary transition-colors">HUNAR</h2>
               <span className="text-[7px] font-bold tracking-[0.25em] text-primary uppercase mt-1">Interiors & Construction</span>
             </div>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-10">
+          <nav className="hidden md:flex items-center gap-10" aria-label="Main Navigation">
             {links.map((link) => (
               <Link 
                 key={link.path} 
@@ -71,12 +76,17 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link to="/contact" className="hidden lg:flex items-center justify-center px-6 h-10 border border-primary text-primary text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-primary hover:text-white transition-all duration-300">
-              Request Quote
-            </Link>
+            <div className="hidden md:flex items-center gap-6">
+              <BrandToggle currentBrand="hunar" onToggle={onSwitchBrand} />
+              <Link to="/contact" aria-label="Request a quote" className="hidden lg:flex items-center justify-center px-6 h-10 border border-primary text-primary text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-primary hover:text-white transition-all duration-300">
+                Request Quote
+              </Link>
+            </div>
             <button 
               className="md:hidden text-white p-2 hover:text-primary transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-expanded={isMobileMenuOpen}
+              aria-label="Toggle mobile menu"
             >
               <span className="material-symbols-outlined">{isMobileMenuOpen ? 'close' : 'menu'}</span>
             </button>
@@ -86,29 +96,49 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[60] bg-charcoal/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 p-10 md:hidden animate-in fade-in duration-300">
-          <button className="absolute top-10 right-10 text-white hover:text-primary transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
-            <span className="material-symbols-outlined text-4xl">close</span>
-          </button>
-          {links.map((link) => (
-            <Link 
-              key={link.path} 
-              to={link.path}
-              className={`text-2xl font-headline font-bold uppercase tracking-widest transition-colors ${
-                location.pathname === link.path ? 'text-primary' : 'text-white hover:text-primary'
-              }`}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {link.name}
-            </Link>
-          ))}
-          <Link 
-            to="/contact"
-            className="mt-8 px-10 py-4 border border-primary text-primary text-[12px] font-bold tracking-[0.2em] uppercase hover:bg-primary hover:text-white transition-all"
+        <div className="fixed inset-0 z-[60] bg-charcoal/98 backdrop-blur-3xl flex flex-col items-center justify-center p-12 md:hidden animate-in fade-in zoom-in-95 duration-500">
+          <button 
+            className="absolute top-10 right-10 text-white/50 hover:text-white hover:rotate-90 transition-all duration-300" 
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Inquire Now
-          </Link>
+            <span className="material-symbols-outlined text-4xl">close</span>
+          </button>
+          
+          <div className="flex flex-col items-center gap-10 w-full">
+            <div className="flex flex-col items-center gap-2 mb-8">
+              <span className="text-primary text-[8px] font-bold uppercase tracking-[0.4em]">Navigation</span>
+              <div className="h-[1px] w-12 bg-white/10" />
+            </div>
+
+            {links.map((link, i) => (
+              <Link 
+                key={link.path} 
+                to={link.path}
+                className={`text-4xl font-headline font-extrabold uppercase tracking-tight transition-all duration-500 hover:text-primary ${
+                  location.pathname === link.path ? 'text-primary' : 'text-white'
+                }`}
+                style={{ animationDelay: `${i * 100}ms` }}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
+
+            <div className="mt-12 pt-12 border-t border-white/5 w-full flex flex-col items-center gap-12">
+              <div className="flex flex-col items-center gap-4">
+                <span className="text-[9px] font-bold uppercase tracking-[0.4em] text-white/30">Switch Brand</span>
+                <BrandToggle currentBrand="hunar" onToggle={onSwitchBrand} />
+              </div>
+              
+              <Link 
+                to="/contact"
+                className="w-full max-w-xs py-5 border-2 border-primary text-primary text-[10px] font-black tracking-[0.3em] uppercase hover:bg-primary hover:text-white transition-all text-center rounded-sm shadow-[0_15px_30px_-10px_rgba(177,141,89,0.3)]"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Inquire Now
+              </Link>
+            </div>
+          </div>
         </div>
       )}
 

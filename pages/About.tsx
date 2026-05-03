@@ -1,23 +1,26 @@
-
 import React from 'react';
+import SEO from '../components/SEO';
 
 const About: React.FC = () => {
   return (
-    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="bg-bg-light animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <SEO title="About Our Studio | Hunar Architecture" description="Learn about Hunar's synthesis of form and infrastructure, powered by MBSYS engineering excellence in Bengaluru." />
       {/* Identity Section */}
       <section className="relative min-h-[70vh] flex items-center bg-charcoal text-white overflow-hidden pt-24">
         <div className="absolute inset-0 opacity-40">
           <div className="absolute inset-0 bg-gradient-to-r from-charcoal to-transparent z-10"></div>
           <img 
-            alt="About Hero" 
+            alt="Contemporary Architecture Skyline" 
             className="w-full h-full object-cover grayscale brightness-50" 
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000"
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=60&w=1920"
+            width="1920"
+            height="1080"
           />
         </div>
         <div className="relative z-20 max-w-[1440px] mx-auto px-6 md:px-12 w-full">
           <div className="max-w-4xl border-l border-primary/50 pl-8 md:pl-16">
             <span className="text-primary text-xs uppercase tracking-[0.4em] font-bold mb-6 block">Our Identity</span>
-            <h1 className="text-5xl md:text-8xl font-light leading-[1.1] mb-8 uppercase">
+            <h1 className="text-[clamp(2.5rem,7vw,5rem)] md:text-[clamp(4rem,9vw,7rem)] font-light leading-[1.1] mb-8 uppercase">
               The Synthesis of <br/>
               <span className="font-bold text-primary italic">Form & Infrastructure.</span>
             </h1>
@@ -34,7 +37,7 @@ const About: React.FC = () => {
           <div className="grid lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-5">
               <h2 className="text-xs uppercase tracking-[0.4em] font-bold text-primary mb-8">Engineering Integration</h2>
-              <h3 className="text-4xl md:text-5xl font-bold text-charcoal leading-tight mb-10 font-headline uppercase">
+              <h3 className="text-[clamp(2rem,5vw,3rem)] md:text-[clamp(2.5rem,6vw,4rem)] font-bold text-charcoal leading-tight mb-10 font-headline uppercase">
                 Design Mastery <br/> Meets Engineering.
               </h3>
               <div className="space-y-8 text-charcoal/70 leading-relaxed font-light">
@@ -50,9 +53,12 @@ const About: React.FC = () => {
               <div className="space-y-4">
                 <div className="aspect-[4/5] bg-charcoal overflow-hidden group relative">
                   <img 
-                    alt="Creative Studio" 
+                    alt="Hunar Creative Design Studio" 
                     className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" 
-                    src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=800"
+                    src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=60&w=800"
+                    loading="lazy"
+                    width="600"
+                    height="750"
                   />
                   <div className="absolute inset-0 border border-white/5 pointer-events-none"></div>
                 </div>
@@ -64,9 +70,12 @@ const About: React.FC = () => {
               <div className="space-y-4 mt-12">
                 <div className="aspect-[4/5] bg-charcoal overflow-hidden group relative">
                   <img 
-                    alt="Technical" 
+                    alt="Precision Engineering and BIM Infrastructure" 
                     className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" 
-                    src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=800"
+                    src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=60&w=800"
+                    loading="lazy"
+                    width="600"
+                    height="750"
                   />
                   <div className="absolute inset-0 border border-white/5 pointer-events-none"></div>
                 </div>
@@ -83,8 +92,8 @@ const About: React.FC = () => {
       {/* Quote Section */}
       <section className="py-32 bg-charcoal text-white overflow-hidden relative border-y border-white/5">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <span className="material-symbols-outlined text-primary text-6xl mb-8 opacity-50">format_quote</span>
-          <blockquote className="text-2xl md:text-5xl font-light leading-tight mb-12 font-headline uppercase italic">
+          <span className="material-symbols-outlined text-primary text-6xl mb-8 opacity-50" aria-hidden="true">format_quote</span>
+          <blockquote className="text-[clamp(1.5rem,4vw,2.5rem)] md:text-[clamp(2rem,5vw,3.5rem)] font-light leading-tight mb-12 font-headline uppercase italic">
             "Architecture is where the poetry of space meets the <span className="text-primary font-medium">discipline of physics</span>. Our partnership with MBSYS ensures neither is sacrificed."
           </blockquote>
           <div className="flex flex-col items-center gap-4">
