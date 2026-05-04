@@ -65,7 +65,7 @@ const Layout: React.FC<{ children: React.ReactNode, onSwitchBrand: () => void }>
               <Link 
                 key={link.path} 
                 to={link.path}
-                className={`text-[10px] font-bold tracking-[0.2em] uppercase transition-colors relative group/link py-2 ${
+                className={`text-xs font-bold tracking-[0.2em] uppercase transition-colors relative group/link py-2 ${
                   location.pathname === link.path ? 'text-primary' : 'text-white/70 hover:text-primary'
                 }`}
               >
@@ -160,11 +160,11 @@ const Layout: React.FC<{ children: React.ReactNode, onSwitchBrand: () => void }>
               src={mapEmbedUrl}
               width="100%" 
               height="100%" 
-              style={{ border: 0, filter: 'grayscale(1) contrast(1.1) brightness(0.8)' }} 
+              style={{ border: 0 }} 
               allowFullScreen={true} 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
-              className="group-hover:grayscale-0 transition-all duration-1000"
+              className="transition-all duration-1000"
               title="HUNAR | MBSYS Studio Location"
             />
             <div className="absolute top-6 left-6 z-20 bg-charcoal/90 p-4 border-l-2 border-primary backdrop-blur-sm">
@@ -191,7 +191,7 @@ const Layout: React.FC<{ children: React.ReactNode, onSwitchBrand: () => void }>
           </div>
           <div>
             <h5 className="text-[10px] uppercase tracking-[0.3em] font-bold text-primary mb-8">Navigation</h5>
-            <ul className="space-y-4 text-xs font-light text-white/60">
+            <ul className="space-y-4 text-sm font-light text-white/60">
               <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
               {NAV_LINKS.map(link => (
                 <li key={link.path}><Link to={link.path} className="hover:text-white transition-colors">{link.name}</Link></li>
@@ -200,7 +200,7 @@ const Layout: React.FC<{ children: React.ReactNode, onSwitchBrand: () => void }>
           </div>
           <div>
             <h5 className="text-[10px] uppercase tracking-[0.3em] font-bold text-primary mb-8">Services</h5>
-            <ul className="space-y-4 text-xs font-light text-white/60">
+            <ul className="space-y-4 text-sm font-light text-white/60">
               <li>Interior Architecture</li>
               <li>Civil Construction</li>
               <li>Project Consultancy</li>
@@ -209,7 +209,7 @@ const Layout: React.FC<{ children: React.ReactNode, onSwitchBrand: () => void }>
           </div>
           <div>
             <h5 className="text-[10px] uppercase tracking-[0.3em] font-bold text-primary mb-8">Connect</h5>
-            <div className="space-y-4 text-xs font-light text-white/60">
+            <div className="space-y-4 text-sm font-light text-white/60">
               <p>231, Zamann Manzil, 3rd Main Road,<br/>Ilyas Nagar, J.P. Nagar, Bengaluru,<br/>Karnataka 560111</p>
               <p>concierge@hunar.archi</p>
               <p>+91 98863 74122</p>
@@ -222,10 +222,10 @@ const Layout: React.FC<{ children: React.ReactNode, onSwitchBrand: () => void }>
           </div>
         </div>
         <div className="max-w-[1440px] mx-auto px-6 lg:px-20 py-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-[8px] uppercase tracking-[0.4em] text-white/30 text-center md:text-left">© 2024 HUNAR ARCHITECTURE & CONSTRUCTION. POWERED BY MBSYS.</p>
+          <p className="text-[10px] uppercase tracking-[0.4em] text-white/30 text-center md:text-left">© 2024 HUNAR ARCHITECTURE & CONSTRUCTION. POWERED BY MBSYS.</p>
           <div className="flex gap-8">
-            <span className="text-[8px] uppercase tracking-[0.4em] text-white/30 hover:text-white cursor-pointer transition-colors">Privacy Policy</span>
-            <span className="text-[8px] uppercase tracking-[0.4em] text-white/30 hover:text-white cursor-pointer transition-colors">Terms of Service</span>
+            <span className="text-[10px] uppercase tracking-[0.4em] text-white/30 hover:text-white cursor-pointer transition-colors">Privacy Policy</span>
+            <span className="text-[10px] uppercase tracking-[0.4em] text-white/30 hover:text-white cursor-pointer transition-colors">Terms of Service</span>
           </div>
         </div>
       </footer>

@@ -79,7 +79,7 @@ const Home: React.FC = () => {
             <div className="aspect-[4/5] w-full relative">
               <img 
                 src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=60&w=1200" 
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 border border-white/10" 
+                className="w-full h-full object-cover transition-all duration-1000 border border-white/10" 
                 alt="Modern Architectural Detail" 
                 width="800"
                 height="1000"

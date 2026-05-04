@@ -9,6 +9,7 @@ const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     inquiryType: 'Residential Interior',
     details: ''
   });
@@ -45,8 +46,9 @@ const Contact: React.FC = () => {
     submissionData.append("access_key", "e3068bf8-3c15-4094-9444-225621b099e6");
     submissionData.append("name", formData.name);
     submissionData.append("email", formData.email);
+    submissionData.append("phone", formData.phone);
     submissionData.append("subject", `HUNAR: New Inquiry - ${formData.inquiryType}`);
-    submissionData.append("message", `Type: ${formData.inquiryType}\nDetails: ${formData.details}`);
+    submissionData.append("message", `Type: ${formData.inquiryType}\nPhone: ${formData.phone}\nDetails: ${formData.details}`);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -61,6 +63,7 @@ const Contact: React.FC = () => {
         setFormData({
           name: '',
           email: '',
+          phone: '',
           inquiryType: 'Residential Interior',
           details: ''
         });
@@ -165,6 +168,19 @@ const Contact: React.FC = () => {
                 </div>
               </div>
               <div className="flex flex-col gap-2">
+                <label htmlFor="phone-number" className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40">Phone Number</label>
+                <input 
+                  id="phone-number"
+                  name="phone"
+                  required
+                  type="tel" 
+                  className="border-b border-charcoal/10 py-3 focus:outline-none focus:border-primary transition-colors bg-transparent" 
+                  placeholder="+91 00000 00000"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
                 <label htmlFor="inquiry-type" className="text-[10px] uppercase tracking-widest font-bold text-charcoal/40">Inquiry Type</label>
                 <div className="relative">
                   <select 
@@ -215,7 +231,7 @@ const Contact: React.FC = () => {
         </div>
       </div>
 
-      <section className="w-full h-[500px] relative bg-charcoal grayscale hover:grayscale-0 transition-all duration-1000">
+      <section className="w-full h-[500px] relative bg-charcoal transition-all duration-1000">
         <iframe 
           title="HUNAR Studio Location"
           src={mapEmbedUrl}

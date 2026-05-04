@@ -54,10 +54,10 @@ const Services: React.FC = () => {
                 <span className="material-symbols-outlined text-charcoal/20 group-hover:text-primary transition-colors" aria-hidden="true">{service.icon}</span>
               </div>
               <div>
-                <div className="mb-6 overflow-hidden aspect-video grayscale group-hover:grayscale-0 transition-all duration-700">
+                <div className="mb-6 overflow-hidden aspect-video transition-all duration-700">
                   <img 
                     alt={`Hunar Service: ${service.title}`} 
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000" 
+                    className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110" 
                     src={`${service.image.split('&q=')[0]}&q=60&w=800`} 
                     loading="lazy"
                     width="400"

@@ -72,7 +72,7 @@ const Projects: React.FC = () => {
                 width="800"
                 height="600"
                 loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-105 group-hover:grayscale-0 transition-all duration-700 animate-in fade-in duration-1000"
+                className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 animate-in fade-in duration-1000"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent flex flex-col justify-end p-10 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
                 <span className="text-primary text-[10px] font-bold tracking-[0.3em] uppercase mb-2">{project.category}</span>
