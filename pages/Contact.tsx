@@ -45,7 +45,7 @@ const Contact: React.FC = () => {
     submissionData.append("access_key", "e3068bf8-3c15-4094-9444-225621b099e6");
     submissionData.append("name", formData.name);
     submissionData.append("email", formData.email);
-    submissionData.append("subject", `New Inquiry: ${formData.inquiryType}`);
+    submissionData.append("subject", `HUNAR: New Inquiry - ${formData.inquiryType}`);
     submissionData.append("message", `Type: ${formData.inquiryType}\nDetails: ${formData.details}`);
 
     try {
