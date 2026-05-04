@@ -32,7 +32,7 @@ const App: React.FC = () => {
     setOverlayColor("#020617"); // MBSYS Deep Slate
     setIsExiting(true);
     setTimeout(() => {
-      window.location.href = 'http://localhost:3000?from=hunar';
+      window.location.href = 'https://mbsys.co.in?from=hunar';
     }, 1100);
   };
 
