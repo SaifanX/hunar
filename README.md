@@ -2,6 +2,7 @@
 
 [![Live Site](https://img.shields.io/badge/Live-hunar.mbsys.co.in-0F172A?style=for-the-badge)](https://hunar.mbsys.co.in)
 [![Tech Stack](https://img.shields.io/badge/Stack-React%20%7C%20Vite%20%7C%20Tailwind%204-EF4444?style=for-the-badge)](https://github.com/SaifanX/hunar)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2a6ab6fd-f60a-421d-a487-38c85044f2c5/deploy-status)](https://app.netlify.com/projects/hunar-1/deploys)
 
 Hunar is a luxury architectural design studio platform that bridges the gap between digital precision and physical spatial aesthetics. A sister brand to MBSYS, Hunar focuses on minimalist elegance and architectural storytelling.
 
